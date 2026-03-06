@@ -1,20 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="lv">
 <head>
-    <title>Mana Mini App</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmu Ieteicējs</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background-color: #f4f4f9; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 400px; width: 100%; }
+        h2 { color: #333; }
+        .question { margin-bottom: 15px; }
+        select, button { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; }
+        button { background-color: #0088cc; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #0077b5; }
+        #result { margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 8px; display: none; text-align: center; }
+    </style>
 </head>
 <body>
-    <h1>Sveiks no Mini App 🚀</h1>
-    <button onclick="sendData()">Sūtīt datus</button>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
+<div class="card">
+    <h2>🎬 Atrodi savu filmu</h2>
+    
+    <div class="question">
+        <label>Kāds ir tavs garastāvoklis?</label>
+        <select id="mood">
+            <option value="happy">Priecīgs (gribu smieties)</option>
+            <option value="sad">Skumjš (gribu padomāt)</option>
+            <option value="adventurous">Piedzīvojumu kārs</option>
+        </select>
+    </div>
 
-        function sendData() {
-            tg.sendData("Hello from mini app!");
+    <div class="question">
+        <label>Cik daudz laika tev ir?</label>
+        <select id="time">
+            <option value="short">Mazāk par 1.5h</option>
+            <option value="long">Vairāk par 2h</option>
+        </select>
+    </div>
+
+    <div class="question">
+        <label>Kāda vide tev patīk?</label>
+        <select id="setting">
+            <option value="real">Reālā pasaule</option>
+            <option value="fantasy">Fantāzija/Kosmoss</option>
+        </select>
+    </div>
+
+    <button onclick="recommendMovie()">Saņemt ieteikumu</button>
+
+    <div id="result">
+        <strong>Mūsu ieteikums:</strong>
+        <p id="movieName"></p>
+    </div>
+</div>
+
+<script>
+    function recommendMovie() {
+        const mood = document.getElementById('mood').value;
+        const time = document.getElementById('time').value;
+        const setting = document.getElementById('setting').value;
+        
+        let movie = "";
+
+        // Vienkārša loģika ieteikumiem
+        if (mood === "happy" && setting === "real") {
+            movie = "The Intouchables (Neaizskaramie)";
+        } else if (mood === "adventurous" && setting === "fantasy") {
+            movie = "Interstellar vai Guardians of the Galaxy";
+        } else if (mood === "sad" && time === "long") {
+            movie = "The Green Mile (Zaļā jūdze)";
+        } else if (setting === "fantasy") {
+            movie = "Harry Potter vai Lord of the Rings";
+        } else {
+            movie = "Inception (Pirmsākums)";
         }
-    </script>
+
+        // Parādīt rezultātu
+        const resultDiv = document.getElementById('result');
+        document.getElementById('movieName').innerText = movie;
+        resultDiv.style.display = 'block';
+    }
+</script>
+
 </body>
 </html>
