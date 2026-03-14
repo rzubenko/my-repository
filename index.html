@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMDB Filmu Ieteicējs</title>
+    <title>What To Watch</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; background-color: #0d253f; color: white; }
         .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); max-width: 450px; width: 100%; color: #333; }
@@ -23,7 +23,7 @@
 <body>
 
 <div class="card">
-    <h2>🎬 TMDB Ieteicējs</h2>
+    <h2>What To Watch</h2>
     
     <div class="question">
         <label>Izvēlies žanru:</label>
@@ -56,7 +56,7 @@
 
 <script>
     async function fetchMovie() {
-        // !!! AIZSTĀJ ŠO AR SAVU REĀLO API ATSLĒGU !!!
+        // API ATSLĒGA
         const apiKey = 'd9de971b5b42ae37a8c1e1b9df96b868'; 
         const genreId = document.getElementById('genre').value;
         const lang = document.getElementById('language').value;
@@ -70,7 +70,7 @@
             
             if (data.results && data.results.length > 0) {
                 // Izvēlamies nejaušu filmu no pirmajiem 20 rezultātiem
-                const randomIndex = Math.floor(Math.random() * Math.min(data.results.length, 20));
+                const randomIndex = Math.floor(Math.random() * Math.min(data.results.length, 50));
                 const movie = data.results[randomIndex];
 
                 // Aizpildām datus
